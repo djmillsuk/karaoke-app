@@ -1,0 +1,17 @@
+[Unit]
+Description=Karaoke Songbook
+After=network.target
+
+[Service]
+Type=simple
+User=karaoke
+WorkingDirectory=/opt/karaoke-app
+Environment=NODE_ENV=production
+Environment=PORT=8080
+Environment=CSV_PATH=/opt/karaoke-app/data/songs.csv
+ExecStart=/usr/bin/node server/index.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

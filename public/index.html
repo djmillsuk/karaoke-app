@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Karaoke Songbook</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎤 Karaoke Songbook</h1>
+    <div class="search-wrap">
+      <input
+        id="search"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Search artists or songs…"
+        aria-label="Search artists or songs"
+      />
+      <button id="random" type="button" title="Pick a random song from the whole songbook">🎲 Random</button>
+      <button id="favourites" type="button" aria-pressed="false" title="View your saved songs">
+        ★ Favourites <span id="fav-count" class="badge">0</span>
+      </button>
+    </div>
+    <p id="stats" class="stats"></p>
+  </header>
+
+  <main class="layout">
+    <section class="panel artists-panel" aria-labelledby="artists-heading">
+      <h2 id="artists-heading">Artists <span id="artist-count" class="badge"></span></h2>
+      <div id="artist-scroll" class="scroller" tabindex="0">
+        <div id="artist-spacer" class="spacer"><ul id="artist-list" class="list"></ul></div>
+      </div>
+    </section>
+
+    <section class="panel detail-panel" aria-labelledby="detail-heading">
+      <h2 id="detail-heading">Pick an artist</h2>
+      <p id="detail-sub" class="stats">Or type in the search box above.</p>
+      <div id="detail-scroll" class="scroller">
+        <div id="detail-spacer" class="spacer"><ul id="song-list" class="list"></ul></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
