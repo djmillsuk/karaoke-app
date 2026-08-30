@@ -3,3 +3,4 @@ npm-debug.log*
 .env
 data/*.csv
 !data/songs.csv
+data/.quiz-host-key

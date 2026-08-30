@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Quiz — Heather's **th Karaoke</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body class="quiz-body">
+  <header class="topbar">
+    <h1>🧠 Quiz</h1>
+    <p class="stats"><a href="index.html">← Back to songbook</a></p>
+  </header>
+
+  <main class="quiz-main">
+    <section id="join-view" class="quiz-card">
+      <h2>Join the quiz</h2>
+      <p class="stats">Enter a name so the host can see your score.</p>
+      <form id="join-form">
+        <input id="join-name" type="text" maxlength="40" autocomplete="off" placeholder="Your name" required />
+        <button type="submit">Join</button>
+      </form>
+    </section>
+
+    <section id="quiz-view" class="quiz-card" hidden>
+      <p id="quiz-status" class="stats"></p>
+
+      <div id="waiting-view">
+        <h2>Waiting for the host to start…</h2>
+      </div>
+
+      <div id="question-view" hidden>
+        <div class="timer-bar"><div id="timer-fill" class="timer-fill"></div></div>
+        <h2 id="question-text"></h2>
+        <div id="options" class="options"></div>
+        <p id="answer-note" class="stats"></p>
+      </div>
+
+      <div id="reveal-view" hidden>
+        <h2 id="reveal-heading"></h2>
+        <div id="reveal-options" class="options"></div>
+        <h3>Leaderboard</h3>
+        <ol id="leaderboard" class="leaderboard"></ol>
+      </div>
+
+      <div id="ended-view" hidden>
+        <h2>🏁 Final results</h2>
+        <ol id="final-leaderboard" class="leaderboard"></ol>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

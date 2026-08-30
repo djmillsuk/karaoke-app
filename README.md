@@ -66,13 +66,25 @@ systemctl enable --now karaoke
 
 Then browse to `http://<container-ip>:8080`. Put it behind nginx/Caddy if you want TLS or a hostname.
 
+## Quiz (host-run, Slido/Kahoot-style)
+
+A live multiple-choice quiz you run from one device while guests answer on their phones.
+
+- Questions live in `data/quiz.json` — an array of `{ question, options: [2-6 strings], correctIndex }`. Edit it and restart the server to load a different set.
+- Open `/host.html` on your device to control the quiz: **Start**, **Reveal answer**, **Next question**, **End quiz**, **Reset**. It's protected by a host key — the default is `slp07491514` (override with `QUIZ_HOST_KEY`), and once logged in you can change it from the host page; the new key is saved to `data/.quiz-host-key` and survives restarts.
+- Guests open `/quiz.html`, enter a name, and answer from a live-updating page (pushed via Server-Sent Events). There's also a 🧠 Quiz link in the songbook header.
+- Scoring: correct answers earn 500–1000 points depending on how fast you answer within the time window; wrong or missed answers score 0.
+
 ## Configuration
 
-| Variable   | Default            | Description                        |
-| ---------- | ------------------ | ---------------------------------- |
-| `PORT`     | `8080`             | HTTP port                          |
-| `HOST`     | `0.0.0.0`          | Bind address                       |
-| `CSV_PATH` | `data/songs.csv`   | Absolute or relative path to CSV   |
+| Variable         | Default            | Description                             |
+| ---------------- | ------------------- | --------------------------------------- |
+| `PORT`           | `8080`              | HTTP port                                |
+| `HOST`           | `0.0.0.0`           | Bind address                              |
+| `CSV_PATH`       | `data/songs.csv`    | Absolute or relative path to song CSV     |
+| `QUIZ_PATH`      | `data/quiz.json`    | Absolute or relative path to quiz questions |
+| `QUIZ_HOST_KEY`  | `slp07491514`       | Initial shared secret required to control the quiz (changeable from the host page afterward) |
+| `QUIZ_ANSWER_MS` | `20000`             | Time allowed per question, in milliseconds |
 
 ## API
 
@@ -83,3 +95,8 @@ Then browse to `http://<container-ip>:8080`. Put it behind nginx/Caddy if you wa
 | `GET /api/search?q=`            | `{ query, limit, count, results }`, max 100      |
 | `GET /api/random`               | A random song from the whole book                |
 | `GET /api/stats`                | Song/artist totals and load time                 |
+| `GET /api/quiz/state`           | Current public quiz state                        |
+| `GET /api/quiz/events`          | SSE stream of quiz state updates                 |
+| `POST /api/quiz/join`           | `{ name }` → `{ playerId }`                      |
+| `POST /api/quiz/answer`         | `{ playerId, optionIndex }`                      |
+| `POST /api/quiz/host/*`         | `start`/`next`/`reveal`/`end`/`reset` — requires `x-quiz-host-key` header |

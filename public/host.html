@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Quiz Host — Heather's **th Karaoke</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎛️</text></svg>" />
+</head>
+<body class="quiz-body">
+  <header class="topbar">
+    <h1>🎛️ Quiz Host</h1>
+    <p class="stats"><a href="index.html">← Back to songbook</a> · <a href="quiz.html">Player view</a></p>
+  </header>
+
+  <main class="quiz-main">
+    <section id="key-view" class="quiz-card">
+      <h2>Enter host key</h2>
+      <p class="stats">Find this in the server console log at startup.</p>
+      <form id="key-form">
+        <input id="key-input" type="password" autocomplete="off" placeholder="Host key" required />
+        <button type="submit">Unlock</button>
+      </form>
+    </section>
+
+    <section id="host-view" class="quiz-card" hidden>
+      <p id="host-status" class="stats"></p>
+
+      <div class="host-controls">
+        <button id="btn-start" type="button">▶ Start quiz</button>
+        <button id="btn-reveal" type="button">👁 Reveal answer</button>
+        <button id="btn-next" type="button">⏭ Next question</button>
+        <button id="btn-end" type="button">🏁 End quiz</button>
+        <button id="btn-reset" type="button" class="danger">↺ Reset</button>
+      </div>
+
+      <h2 id="host-question"></h2>
+      <div id="host-options" class="options"></div>
+
+      <h3>Leaderboard</h3>
+      <ol id="host-leaderboard" class="leaderboard"></ol>
+
+      <h3>Change host key</h3>
+      <form id="change-key-form">
+        <input id="new-key-input" type="password" autocomplete="off" minlength="6" maxlength="100" placeholder="New host key" required />
+        <button type="submit">Update key</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="host.js"></script>
+</body>
+</html>
