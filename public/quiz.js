@@ -89,6 +89,7 @@ function renderOptions(container, options, { disabled = false, correctIndex = -1
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'option';
+    if (text.length === 1) btn.classList.add('option-letter');
     btn.textContent = text;
     if (counts) {
       const total = counts.reduce((a, b) => a + b, 0) || 1;

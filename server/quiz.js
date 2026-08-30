@@ -10,7 +10,9 @@ const MAX_OPTIONS = 10;
 
 /**
  * Load and validate quiz questions from a JSON file.
- * Expected shape: [{ question: string, options: string[2-10], correctIndex: number }]
+ * Expected shape: [{ question: string, options: string[2-10], correctIndex: number, lettersOnly?: boolean }]
+ * When lettersOnly is true, players see only each option's first letter (e.g. a
+ * physical taste test), so no two options may start with the same letter.
  */
 function loadQuestions(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
@@ -31,7 +33,14 @@ function loadQuestions(filePath) {
     if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex >= q.options.length) {
       throw new Error(`question ${i} has an invalid correctIndex`);
     }
-    return { question: q.question.trim(), options: q.options.map((o) => o.trim()), correctIndex: q.correctIndex };
+    const options = q.options.map((o) => o.trim());
+    if (q.lettersOnly) {
+      const letters = options.map((o) => o[0].toUpperCase());
+      if (new Set(letters).size !== letters.length) {
+        throw new Error(`question ${i} has options starting with duplicate letters`);
+      }
+    }
+    return { question: q.question.trim(), options, correctIndex: q.correctIndex, lettersOnly: !!q.lettersOnly };
   });
 }
 
@@ -158,7 +167,10 @@ class QuizEngine extends EventEmitter {
     if (this.index < 0 || !this.questions[this.index]) return base;
 
     const q = this.questions[this.index];
-    base.question = { text: q.question, options: q.options };
+    // Letters-only questions (e.g. a physical taste test) hide the full option
+    // name from players — only the host state below reveals it.
+    const displayOptions = q.lettersOnly ? q.options.map((o) => o[0].toUpperCase()) : q.options;
+    base.question = { text: q.question, options: displayOptions };
     if (this.status === 'question') {
       base.deadline = this.questionStartedAt + this.answerWindowMs;
       base.windowMs = this.answerWindowMs;
@@ -177,7 +189,9 @@ class QuizEngine extends EventEmitter {
   hostState() {
     const state = this.publicState();
     if (this.index >= 0 && this.questions[this.index]) {
-      state.correctIndex = this.questions[this.index].correctIndex;
+      const q = this.questions[this.index];
+      state.question = { text: q.question, options: q.options }; // host always sees full names
+      state.correctIndex = q.correctIndex;
       state.optionCounts = this.optionCounts();
     }
     state.leaderboard = this.leaderboard();

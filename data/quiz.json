@@ -180,44 +180,52 @@
     "correctIndex": 3
   },
   {
-    "question": "Taste test: Scaly bright pink skin, white flesh with crunchy black seeds, mild kiwi-pear taste. Which fruit is this?",
-    "options": ["Kiwi", "Rambutan", "Lychee", "Dragon Fruit (Pitaya)", "Custard Apple", "Guava", "Starfruit (Carambola)", "Pear", "Papaya", "Mango"],
-    "correctIndex": 3
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Kiwi", "Dragon Fruit (Pitaya)", "Guava", "Custard Apple", "Starfruit (Carambola)", "Banana", "Mango", "Orange", "Pear", "Watermelon"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: 5-pointed star cross-section, crisp, tart-sweet citrus-apple flavour. Which fruit is this?",
-    "options": ["Green Apple", "Starfruit (Carambola)", "Kiwi", "Guava", "Persimmon (Sharon Fruit / Kaki)", "Quince", "Pear", "Papaya", "Mango", "Passion Fruit"],
-    "correctIndex": 1
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Apple", "Starfruit (Carambola)", "Kiwi", "Guava", "Persimmon (Sharon Fruit / Kaki)", "Quince", "Mango", "Orange", "Banana", "Watermelon"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: Golden-orange, tomato-like fruit with rich honey/custard sweetness. Which fruit is this?",
-    "options": ["Mango", "Papaya", "Persimmon (Sharon Fruit / Kaki)", "Apricot", "Nectarine", "Peach", "Cantaloupe", "Quince", "Kiwi", "Starfruit (Carambola)"],
-    "correctIndex": 2
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Mango", "Persimmon (Sharon Fruit / Kaki)", "Nectarine", "Cantaloupe", "Apricot", "Kiwi", "Starfruit (Carambola)", "Orange", "Date", "Banana"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: Translucent, floral, sweet-tart, grape-like texture. Which fruit is this?",
-    "options": ["Longan", "Grape", "Lychee (or Rambutan)", "Mangosteen", "Guava", "Dragon Fruit (Pitaya)", "Papaya", "Fig", "Passion Fruit", "Kiwi"],
-    "correctIndex": 2
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Grape", "Lychee (or Rambutan)", "Mangosteen", "Papaya", "Fig", "Kiwi", "Date", "Orange", "Banana", "Watermelon"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: Small orange lantern berry with a paper husk, tangy sweet-sour citrus taste. Which fruit is this?",
-    "options": ["Kumquat", "Cherry Tomato", "Physalis (Cape Gooseberry)", "Mandarin", "Gooseberry", "Cranberry", "Tamarillo", "Mango", "Fig", "Dragon Fruit (Pitaya)"],
-    "correctIndex": 2
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Kumquat", "Physalis (Cape Gooseberry)", "Cherry Tomato", "Mandarin", "Tamarillo", "Date", "Orange", "Banana", "Starfruit (Carambola)", "Guava"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: Soft, chewy, teardrop fruit packed with sweet, crunchy tiny seeds. Which fruit is this?",
-    "options": ["Date", "Prune", "Fresh Fig", "Plum", "Persimmon (Sharon Fruit / Kaki)", "Mulberry", "Kiwi", "Papaya", "Passion Fruit", "Starfruit (Carambola)"],
-    "correctIndex": 2
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Date", "Fresh Fig", "Prune", "Mulberry", "Kiwi", "Orange", "Banana", "Cantaloupe", "Starfruit (Carambola)", "Guava"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: Wrinkly dark purple rind filled with jelly-like, intensely aromatic tart orange pulp. Which fruit is this?",
-    "options": ["Pomegranate", "Passion Fruit", "Fig", "Kiwi", "Guava", "Lychee (or Rambutan)", "Tamarillo", "Mango", "Persimmon (Sharon Fruit / Kaki)", "Dragon Fruit (Pitaya)"],
-    "correctIndex": 1
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Fig", "Passion Fruit", "Kiwi", "Guava", "Lychee (or Rambutan)", "Tamarillo", "Mango", "Date", "Orange", "Banana"],
+    "correctIndex": 1,
+    "lettersOnly": true
   },
   {
-    "question": "Taste test: Vibrant orange soft flesh with a mild, buttery, melon-musk sweetness. Which fruit is this?",
-    "options": ["Mango", "Cantaloupe", "Papaya", "Peach", "Melon", "Persimmon (Sharon Fruit / Kaki)", "Nectarine", "Kiwi", "Starfruit (Carambola)", "Fig"],
-    "correctIndex": 2
+    "question": "Taste test: Which fruit is it?",
+    "options": ["Mango", "Papaya", "Cantaloupe", "Nectarine", "Kiwi", "Starfruit (Carambola)", "Fig", "Orange", "Date", "Banana"],
+    "correctIndex": 1,
+    "lettersOnly": true
   }
 ]
 
