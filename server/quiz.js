@@ -6,11 +6,11 @@ const EventEmitter = require('events');
 
 const MAX_NAME_LEN = 40;
 const MIN_OPTIONS = 2;
-const MAX_OPTIONS = 6;
+const MAX_OPTIONS = 10;
 
 /**
  * Load and validate quiz questions from a JSON file.
- * Expected shape: [{ question: string, options: string[2-6], correctIndex: number }]
+ * Expected shape: [{ question: string, options: string[2-10], correctIndex: number }]
  */
 function loadQuestions(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
