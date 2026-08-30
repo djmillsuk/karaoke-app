@@ -168,18 +168,17 @@ class QuizEngine extends EventEmitter {
 
     const q = this.questions[this.index];
     // Letters-only questions (e.g. a physical taste test) hide the full option
-    // name from players — only the host state below reveals it.
-    const displayOptions = q.lettersOnly ? q.options.map((o) => o[0].toUpperCase()) : q.options;
+    // name from players while the question is open; reveal shows the full name.
+    const revealed = this.status === 'reveal' || this.status === 'ended';
+    const displayOptions = q.lettersOnly && !revealed ? q.options.map((o) => o[0].toUpperCase()) : q.options;
     base.question = { text: q.question, options: displayOptions };
     if (this.status === 'question') {
       base.deadline = this.questionStartedAt + this.answerWindowMs;
       base.windowMs = this.answerWindowMs;
     }
-    if (this.status === 'reveal' || this.status === 'ended') {
+    if (revealed) {
       base.correctIndex = q.correctIndex;
       base.optionCounts = this.optionCounts();
-    }
-    if (this.status === 'reveal' || this.status === 'ended') {
       base.leaderboard = this.leaderboard();
     }
     return base;
