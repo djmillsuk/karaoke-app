@@ -9,6 +9,10 @@ const el = {
   quizView: document.getElementById('quiz-view'),
   quizStatus: document.getElementById('quiz-status'),
   waitingView: document.getElementById('waiting-view'),
+  waitingHeading: document.getElementById('waiting-heading'),
+  roundEndedView: document.getElementById('round-ended-view'),
+  roundEndedHeading: document.getElementById('round-ended-heading'),
+  roundLeaderboard: document.getElementById('round-leaderboard'),
   questionView: document.getElementById('question-view'),
   timerFill: document.getElementById('timer-fill'),
   questionText: document.getElementById('question-text'),
@@ -30,7 +34,6 @@ try {
   player = null;
 }
 
-let answeredIndex = -1; // question index the player has already answered
 let timerRaf = null;
 
 let toastTimer;
@@ -62,7 +65,7 @@ el.joinForm.addEventListener('submit', async (e) => {
     const { playerId, generation } = await postJson('/api/quiz/join', { name });
     player = { playerId, name, generation };
     localStorage.setItem(PLAYER_KEY, JSON.stringify(player));
-    answeredIndex = -1;
+    answeredKey = '';
     lastPickedIndex = -1;
     showQuiz();
   } catch (err) {
@@ -115,7 +118,7 @@ async function submitAnswer(optionIndex) {
   if (!player) return;
   try {
     await postJson('/api/quiz/answer', { playerId: player.playerId, optionIndex });
-    answeredIndex = currentIndex;
+    answeredKey = currentKey;
     el.answerNote.textContent = 'Answer submitted — waiting for the host to reveal…';
     renderOptions(el.options, currentOptions, { disabled: true, myIndex: optionIndex });
   } catch (err) {
@@ -141,7 +144,8 @@ function renderLeaderboard(list, board) {
   });
 }
 
-let currentIndex = -1;
+let currentKey = ''; // `${roundIndex}:${questionIndex}` of the question currently shown
+let answeredKey = ''; // key of the question the player has already answered
 let currentOptions = [];
 let lastPickedIndex = -1;
 
@@ -168,25 +172,44 @@ function render(state) {
     return;
   }
 
-  el.quizStatus.textContent = state.index >= 0 ? `Question ${state.index + 1} of ${state.total}` : '';
   el.waitingView.hidden = true;
+  el.roundEndedView.hidden = true;
   el.questionView.hidden = true;
   el.revealView.hidden = true;
   el.endedView.hidden = true;
 
-  if (state.status === 'idle' || state.index < 0) {
+  if (state.status === 'idle') {
+    el.quizStatus.textContent = '';
+    el.waitingHeading.textContent = 'Waiting for the host to start the quiz…';
     el.waitingView.hidden = false;
-    el.quizStatus.textContent = 'Waiting for the host to start the quiz…';
     return;
   }
 
-  currentIndex = state.index;
+  if (state.status === 'round-ended') {
+    stopTimer();
+    el.quizStatus.textContent = `Round ${state.roundIndex + 1} of ${state.totalRounds} complete`;
+    el.roundEndedHeading.textContent = `🎉 ${state.roundName} complete!`;
+    renderLeaderboard(el.roundLeaderboard, state.leaderboard);
+    el.roundEndedView.hidden = false;
+    return;
+  }
+
+  if (state.status === 'ended') {
+    stopTimer();
+    el.quizStatus.textContent = 'Quiz complete';
+    el.endedView.hidden = false;
+    renderLeaderboard(el.finalLeaderboard, state.leaderboard);
+    return;
+  }
+
+  el.quizStatus.textContent = `${state.roundName} · Question ${state.questionIndex + 1} of ${state.roundQuestionTotal}`;
+  currentKey = `${state.roundIndex}:${state.questionIndex}`;
   currentOptions = state.question ? state.question.options : [];
 
   if (state.status === 'question') {
     el.questionView.hidden = false;
     el.questionText.textContent = state.question.text;
-    const alreadyAnswered = answeredIndex === state.index;
+    const alreadyAnswered = answeredKey === currentKey;
     startTimer(state.deadline, state.windowMs);
     el.answerNote.textContent = alreadyAnswered
       ? 'Answer submitted — waiting for the host to reveal…'
@@ -199,7 +222,7 @@ function render(state) {
     stopTimer();
     el.revealView.hidden = false;
     el.revealHeading.textContent = state.question.text;
-    const myIndex = answeredIndex === state.index ? lastPickedIndex : -1;
+    const myIndex = answeredKey === currentKey ? lastPickedIndex : -1;
     renderOptions(el.revealOptions, state.question.options, {
       disabled: true,
       correctIndex: state.correctIndex,
@@ -207,13 +230,6 @@ function render(state) {
       counts: state.optionCounts
     });
     renderLeaderboard(el.leaderboard, state.leaderboard);
-    return;
-  }
-
-  if (state.status === 'ended') {
-    stopTimer();
-    el.endedView.hidden = false;
-    renderLeaderboard(el.finalLeaderboard, state.leaderboard);
   }
 }
 

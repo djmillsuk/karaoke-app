@@ -27,7 +27,14 @@
       <p id="quiz-status" class="stats"></p>
 
       <div id="waiting-view">
-        <h2>Waiting for the host to start…</h2>
+        <h2 id="waiting-heading">Waiting for the host to start…</h2>
+      </div>
+
+      <div id="round-ended-view" hidden>
+        <h2 id="round-ended-heading"></h2>
+        <p class="stats">Waiting for the host to start the next round…</p>
+        <h3>Leaderboard</h3>
+        <ol id="round-leaderboard" class="leaderboard"></ol>
       </div>
 
       <div id="question-view" hidden>

@@ -8,53 +8,67 @@ const MAX_NAME_LEN = 40;
 const MIN_OPTIONS = 2;
 const MAX_OPTIONS = 10;
 
+function validateQuestion(q, label) {
+  if (!q || typeof q.question !== 'string' || !q.question.trim()) {
+    throw new Error(`${label} is missing "question" text`);
+  }
+  if (!Array.isArray(q.options) || q.options.length < MIN_OPTIONS || q.options.length > MAX_OPTIONS) {
+    throw new Error(`${label} must have between ${MIN_OPTIONS} and ${MAX_OPTIONS} options`);
+  }
+  if (q.options.some((o) => typeof o !== 'string' || !o.trim())) {
+    throw new Error(`${label} has an empty option`);
+  }
+  if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex >= q.options.length) {
+    throw new Error(`${label} has an invalid correctIndex`);
+  }
+  const options = q.options.map((o) => o.trim());
+  if (q.lettersOnly) {
+    const letters = options.map((o) => o[0].toUpperCase());
+    if (new Set(letters).size !== letters.length) {
+      throw new Error(`${label} has options starting with duplicate letters`);
+    }
+  }
+  return { question: q.question.trim(), options, correctIndex: q.correctIndex, lettersOnly: !!q.lettersOnly };
+}
+
 /**
- * Load and validate quiz questions from a JSON file.
- * Expected shape: [{ question: string, options: string[2-10], correctIndex: number, lettersOnly?: boolean }]
- * When lettersOnly is true, players see only each option's first letter (e.g. a
- * physical taste test), so no two options may start with the same letter.
+ * Load and validate quiz rounds from a JSON file.
+ * Expected shape: { rounds: [{ name: string, questions: [{ question, options, correctIndex, lettersOnly? }] }] }
+ * lettersOnly questions (e.g. a physical taste test) show players only each
+ * option's first letter, so no two options in that question may share one.
  */
 function loadQuestions(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const data = JSON.parse(raw);
-  if (!Array.isArray(data) || data.length === 0) {
-    throw new Error('quiz file must be a non-empty JSON array');
+  if (!data || !Array.isArray(data.rounds) || data.rounds.length === 0) {
+    throw new Error('quiz file must be an object with a non-empty "rounds" array');
   }
-  return data.map((q, i) => {
-    if (!q || typeof q.question !== 'string' || !q.question.trim()) {
-      throw new Error(`question ${i} is missing "question" text`);
+  return data.rounds.map((round, ri) => {
+    if (!round || typeof round.name !== 'string' || !round.name.trim()) {
+      throw new Error(`round ${ri} is missing a "name"`);
     }
-    if (!Array.isArray(q.options) || q.options.length < MIN_OPTIONS || q.options.length > MAX_OPTIONS) {
-      throw new Error(`question ${i} must have between ${MIN_OPTIONS} and ${MAX_OPTIONS} options`);
+    if (!Array.isArray(round.questions) || round.questions.length === 0) {
+      throw new Error(`round "${round.name}" must have at least one question`);
     }
-    if (q.options.some((o) => typeof o !== 'string' || !o.trim())) {
-      throw new Error(`question ${i} has an empty option`);
-    }
-    if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex >= q.options.length) {
-      throw new Error(`question ${i} has an invalid correctIndex`);
-    }
-    const options = q.options.map((o) => o.trim());
-    if (q.lettersOnly) {
-      const letters = options.map((o) => o[0].toUpperCase());
-      if (new Set(letters).size !== letters.length) {
-        throw new Error(`question ${i} has options starting with duplicate letters`);
-      }
-    }
-    return { question: q.question.trim(), options, correctIndex: q.correctIndex, lettersOnly: !!q.lettersOnly };
+    const questions = round.questions.map((q, qi) => validateQuestion(q, `round "${round.name}" question ${qi}`));
+    return { name: round.name.trim(), questions };
   });
 }
 
 /**
- * Host-run, Slido/Kahoot-style live quiz. Single quiz "room" per server
- * process — this app is built for one party at a time.
+ * Host-run, Slido/Kahoot-style live quiz, organized into rounds. Single quiz
+ * "room" per server process — this app is built for one party at a time.
+ * The host must explicitly start each round; the quiz doesn't auto-advance
+ * from one round into the next.
  */
 class QuizEngine extends EventEmitter {
-  constructor(questions, { answerWindowMs = 20000 } = {}) {
+  constructor(rounds, { answerWindowMs = 20000 } = {}) {
     super();
-    this.questions = questions;
+    this.rounds = rounds;
     this.answerWindowMs = answerWindowMs;
-    this.status = 'idle'; // idle | question | reveal | ended
-    this.index = -1;
+    this.status = 'idle'; // idle | question | reveal | round-ended | ended
+    this.roundIndex = -1;
+    this.questionIndex = -1;
     this.questionStartedAt = 0;
     this.players = new Map(); // playerId -> { name, score }
     this.answers = new Map(); // playerId -> { optionIndex, at }
@@ -62,14 +76,24 @@ class QuizEngine extends EventEmitter {
     this.generation = 1;
   }
 
-  setQuestions(questions) {
-    this.questions = questions;
+  setQuestions(rounds) {
+    this.rounds = rounds;
     this.reset();
+  }
+
+  currentRound() {
+    return this.roundIndex >= 0 ? this.rounds[this.roundIndex] || null : null;
+  }
+
+  currentQuestion() {
+    const round = this.currentRound();
+    return round ? round.questions[this.questionIndex] || null : null;
   }
 
   reset() {
     this.status = 'idle';
-    this.index = -1;
+    this.roundIndex = -1;
+    this.questionIndex = -1;
     this.questionStartedAt = 0;
     this.players.clear();
     this.answers.clear();
@@ -86,21 +110,32 @@ class QuizEngine extends EventEmitter {
     return { playerId, generation: this.generation };
   }
 
-  start() {
-    if (this.questions.length === 0) throw new Error('No questions loaded');
-    this.index = 0;
+  /** Begins the next round. Only allowed before the quiz starts, or after a round has ended. */
+  startRound() {
+    if (this.status !== 'idle' && this.status !== 'round-ended') {
+      throw new Error('A round is already in progress');
+    }
+    if (this.roundIndex + 1 >= this.rounds.length) throw new Error('No more rounds');
+    this.roundIndex += 1;
+    this.questionIndex = 0;
     this.status = 'question';
     this.questionStartedAt = Date.now();
     this.answers.clear();
     this.emit('update');
   }
 
+  /** Advances to the next question, or ends the round/quiz if none remain. */
   next() {
-    if (this.index + 1 >= this.questions.length) {
-      this.end();
+    const round = this.currentRound();
+    if (!round || (this.status !== 'question' && this.status !== 'reveal')) {
+      throw new Error('No active round');
+    }
+    if (this.questionIndex + 1 >= round.questions.length) {
+      this.status = this.roundIndex + 1 >= this.rounds.length ? 'ended' : 'round-ended';
+      this.emit('update');
       return;
     }
-    this.index += 1;
+    this.questionIndex += 1;
     this.status = 'question';
     this.questionStartedAt = Date.now();
     this.answers.clear();
@@ -109,7 +144,8 @@ class QuizEngine extends EventEmitter {
 
   reveal() {
     if (this.status !== 'question') return;
-    const q = this.questions[this.index];
+    const q = this.currentQuestion();
+    if (!q) return;
     for (const [playerId, answer] of this.answers) {
       const player = this.players.get(playerId);
       if (!player || answer.optionIndex !== q.correctIndex) continue;
@@ -121,6 +157,7 @@ class QuizEngine extends EventEmitter {
     this.emit('update');
   }
 
+  /** Ends the whole quiz early, regardless of how many rounds remain. */
   end() {
     this.status = 'ended';
     this.emit('update');
@@ -129,7 +166,8 @@ class QuizEngine extends EventEmitter {
   submitAnswer(playerId, optionIndex) {
     if (this.status !== 'question') throw new Error('No question is currently open');
     if (!this.players.has(playerId)) throw new Error('Unknown player');
-    const q = this.questions[this.index];
+    const q = this.currentQuestion();
+    if (!q) throw new Error('No question is currently open');
     if (!Number.isInteger(optionIndex) || optionIndex < 0 || optionIndex >= q.options.length) {
       throw new Error('Invalid option');
     }
@@ -147,29 +185,37 @@ class QuizEngine extends EventEmitter {
   }
 
   optionCounts() {
-    const q = this.questions[this.index];
+    const q = this.currentQuestion();
+    if (!q) return [];
     const counts = new Array(q.options.length).fill(0);
     for (const answer of this.answers.values()) counts[answer.optionIndex] += 1;
     return counts;
   }
 
-  /** Safe-to-broadcast state. Hides the correct answer until reveal/ended. */
+  /** Safe-to-broadcast state. Hides the correct answer, and letters-only names, until reveal. */
   publicState() {
-    const total = this.questions.length;
+    const round = this.currentRound();
     const base = {
       status: this.status,
-      index: this.index,
-      total,
+      roundIndex: this.roundIndex,
+      totalRounds: this.rounds.length,
+      roundName: round ? round.name : null,
+      questionIndex: this.questionIndex,
+      roundQuestionTotal: round ? round.questions.length : 0,
       totalPlayers: this.players.size,
       answeredCount: this.answers.size,
       generation: this.generation
     };
-    if (this.index < 0 || !this.questions[this.index]) return base;
 
-    const q = this.questions[this.index];
-    // Letters-only questions (e.g. a physical taste test) hide the full option
-    // name from players while the question is open; reveal shows the full name.
-    const revealed = this.status === 'reveal' || this.status === 'ended';
+    if (this.status === 'round-ended' || this.status === 'ended') {
+      base.leaderboard = this.leaderboard();
+      return base;
+    }
+
+    const q = this.currentQuestion();
+    if (!q) return base;
+
+    const revealed = this.status === 'reveal';
     const displayOptions = q.lettersOnly && !revealed ? q.options.map((o) => o[0].toUpperCase()) : q.options;
     base.question = { text: q.question, options: displayOptions };
     if (this.status === 'question') {
@@ -184,12 +230,12 @@ class QuizEngine extends EventEmitter {
     return base;
   }
 
-  /** Full state for the host, including live vote counts while a question is open. */
+  /** Full state for the host, including live vote counts and full option names. */
   hostState() {
     const state = this.publicState();
-    if (this.index >= 0 && this.questions[this.index]) {
-      const q = this.questions[this.index];
-      state.question = { text: q.question, options: q.options }; // host always sees full names
+    const q = this.currentQuestion();
+    if (q) {
+      state.question = { text: q.question, options: q.options };
       state.correctIndex = q.correctIndex;
       state.optionCounts = this.optionCounts();
     }
@@ -199,3 +245,4 @@ class QuizEngine extends EventEmitter {
 }
 
 module.exports = { QuizEngine, loadQuestions };
+

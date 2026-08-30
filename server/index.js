@@ -71,7 +71,8 @@ let quiz = null;
 try {
   quiz = new QuizEngine(loadQuestions(QUIZ_PATH), { answerWindowMs: QUIZ_ANSWER_MS });
   quiz.on('update', () => broadcastQuiz());
-  console.log(`Loaded ${quiz.questions.length} quiz questions from ${QUIZ_PATH}`);
+  const totalQuestions = quiz.rounds.reduce((sum, r) => sum + r.questions.length, 0);
+  console.log(`Loaded ${quiz.rounds.length} quiz rounds (${totalQuestions} questions) from ${QUIZ_PATH}`);
   console.log(`Quiz host key: ${quizHostKey} (change it from the host page, or set QUIZ_HOST_KEY)`);
 } catch (err) {
   console.warn(`Quiz disabled: ${err.message}`);
@@ -203,7 +204,7 @@ app.post('/api/quiz/host/key', requireHostKey, (req, res) => {
 });
 
 for (const [route, action] of [
-  ['start', () => quiz.start()],
+  ['start-round', () => quiz.startRound()],
   ['next', () => quiz.next()],
   ['reveal', () => quiz.reveal()],
   ['end', () => quiz.end()],

@@ -88,7 +88,7 @@ function action(name, handler) {
   });
 }
 
-action('start', el.btnStart);
+action('start-round', el.btnStart);
 action('reveal', el.btnReveal);
 action('next', el.btnNext);
 action('end', el.btnEnd);
@@ -154,16 +154,22 @@ function renderLeaderboard(board) {
 }
 
 function updateButtons(state) {
-  el.btnStart.disabled = state.status === 'question' || state.status === 'reveal';
+  el.btnStart.disabled = state.status !== 'idle' && state.status !== 'round-ended';
   el.btnReveal.disabled = state.status !== 'question';
-  el.btnNext.disabled = state.status === 'idle';
+  el.btnNext.disabled = state.status !== 'question' && state.status !== 'reveal';
   el.btnEnd.disabled = state.status === 'idle' || state.status === 'ended';
 }
 
 async function refresh() {
   const state = await hostFetch('/api/quiz/host/state');
-  el.hostStatus.textContent = `${state.status.toUpperCase()} · ${state.totalPlayers} player${state.totalPlayers === 1 ? '' : 's'}` +
-    (state.index >= 0 ? ` · question ${state.index + 1} of ${state.total} · ${state.answeredCount} answered` : '');
+  let statusLine = `${state.status.toUpperCase()} · ${state.totalPlayers} player${state.totalPlayers === 1 ? '' : 's'}`;
+  if (state.status === 'round-ended') {
+    statusLine += ` · ${state.roundName} complete (round ${state.roundIndex + 1} of ${state.totalRounds})`;
+  } else if (state.roundIndex >= 0 && state.status !== 'ended') {
+    statusLine += ` · ${state.roundName} (round ${state.roundIndex + 1} of ${state.totalRounds})` +
+      ` · question ${state.questionIndex + 1} of ${state.roundQuestionTotal} · ${state.answeredCount} answered`;
+  }
+  el.hostStatus.textContent = statusLine;
   el.hostQuestion.textContent = state.question ? state.question.text : 'No question shown yet';
   if (state.question) {
     renderOptions(state.question.options, state.correctIndex, state.optionCounts);
