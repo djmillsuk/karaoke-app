@@ -365,7 +365,7 @@ mark {
 }
 .option:hover:not(:disabled) { border-color: var(--accent-2); }
 .option:disabled { cursor: default; }
-.option.picked { border-color: var(--accent-2); }
+.option.picked { border-color: #ff9500; border-width: 2px; }
 .option.correct { border-color: #35c46a; color: #35c46a; }
 .option-letter {
   display: flex;
