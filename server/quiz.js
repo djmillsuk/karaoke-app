@@ -252,8 +252,9 @@ class QuizEngine extends EventEmitter {
 
     const revealed = this.status === 'reveal';
     const shuffled = this.shuffledOptions();
-    const displayOptions = q.lettersOnly && !revealed ? shuffled.map((o) => o[0].toUpperCase()) : shuffled;
-    base.question = { text: q.question, options: displayOptions };
+    const displayLetters = q.lettersOnly && !revealed;
+    const displayOptions = displayLetters ? shuffled.map((o) => o[0].toUpperCase()) : shuffled;
+    base.question = { text: q.question, options: displayOptions, lettersOnly: displayLetters };
     if (this.status === 'question') {
       base.deadline = this.questionStartedAt + this.answerWindowMs;
       base.windowMs = this.answerWindowMs;

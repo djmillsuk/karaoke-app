@@ -86,13 +86,13 @@ function showJoin() {
   el.joinName.value = '';
 }
 
-function renderOptions(container, options, { disabled = false, correctIndex = -1, myIndex = -1, counts = null } = {}) {
+function renderOptions(container, options, { disabled = false, correctIndex = -1, myIndex = -1, counts = null, lettersOnly = false } = {}) {
   container.replaceChildren();
   options.forEach((text, i) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'option';
-    if (text.length === 1) btn.classList.add('option-letter');
+    if (lettersOnly) btn.classList.add('option-letter');
     btn.textContent = text;
     if (counts) {
       const total = counts.reduce((a, b) => a + b, 0) || 1;
@@ -216,7 +216,8 @@ function render(state) {
       : `${state.answeredCount} of ${state.totalPlayers} answered`;
     renderOptions(el.options, currentOptions, {
       disabled: alreadyAnswered,
-      myIndex: alreadyAnswered ? lastPickedIndex : -1
+      myIndex: alreadyAnswered ? lastPickedIndex : -1,
+      lettersOnly: !!state.question.lettersOnly
     });
     return;
   }
