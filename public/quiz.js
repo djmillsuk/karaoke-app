@@ -214,7 +214,10 @@ function render(state) {
     el.answerNote.textContent = alreadyAnswered
       ? 'Answer submitted — waiting for the host to reveal…'
       : `${state.answeredCount} of ${state.totalPlayers} answered`;
-    renderOptions(el.options, currentOptions, { disabled: alreadyAnswered });
+    renderOptions(el.options, currentOptions, {
+      disabled: alreadyAnswered,
+      myIndex: alreadyAnswered ? lastPickedIndex : -1
+    });
     return;
   }
 
