@@ -8,6 +8,16 @@ const MAX_NAME_LEN = 40;
 const MIN_OPTIONS = 2;
 const MAX_OPTIONS = 10;
 
+/** Fisher-Yates shuffle of [0..n-1], returning the shuffled index order. */
+function shuffledIndices(n) {
+  const order = Array.from({ length: n }, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
 function validateQuestion(q, label) {
   if (!q || typeof q.question !== 'string' || !q.question.trim()) {
     throw new Error(`${label} is missing "question" text`);
@@ -72,6 +82,9 @@ class QuizEngine extends EventEmitter {
     this.questionStartedAt = 0;
     this.players = new Map(); // playerId -> { name, score }
     this.answers = new Map(); // playerId -> { optionIndex, at }
+    // Random per-question option order, regenerated every time a question is shown.
+    this.shuffle = [];
+    this.shuffledCorrectIndex = -1;
     // Bumped on every reset so clients holding a stale playerId know to re-join.
     this.generation = 1;
   }
@@ -90,6 +103,24 @@ class QuizEngine extends EventEmitter {
     return round ? round.questions[this.questionIndex] || null : null;
   }
 
+  /** Picks a fresh random option order for the question that's about to be shown. */
+  shuffleCurrentQuestion() {
+    const q = this.currentQuestion();
+    if (!q) {
+      this.shuffle = [];
+      this.shuffledCorrectIndex = -1;
+      return;
+    }
+    this.shuffle = shuffledIndices(q.options.length);
+    this.shuffledCorrectIndex = this.shuffle.indexOf(q.correctIndex);
+  }
+
+  /** The current question's options in this run's shuffled display order. */
+  shuffledOptions() {
+    const q = this.currentQuestion();
+    return q ? this.shuffle.map((i) => q.options[i]) : [];
+  }
+
   reset() {
     this.status = 'idle';
     this.roundIndex = -1;
@@ -97,6 +128,8 @@ class QuizEngine extends EventEmitter {
     this.questionStartedAt = 0;
     this.players.clear();
     this.answers.clear();
+    this.shuffle = [];
+    this.shuffledCorrectIndex = -1;
     this.generation += 1;
     this.emit('update');
   }
@@ -121,6 +154,7 @@ class QuizEngine extends EventEmitter {
     this.status = 'question';
     this.questionStartedAt = Date.now();
     this.answers.clear();
+    this.shuffleCurrentQuestion();
     this.emit('update');
   }
 
@@ -139,6 +173,7 @@ class QuizEngine extends EventEmitter {
     this.status = 'question';
     this.questionStartedAt = Date.now();
     this.answers.clear();
+    this.shuffleCurrentQuestion();
     this.emit('update');
   }
 
@@ -148,7 +183,7 @@ class QuizEngine extends EventEmitter {
     if (!q) return;
     for (const [playerId, answer] of this.answers) {
       const player = this.players.get(playerId);
-      if (!player || answer.optionIndex !== q.correctIndex) continue;
+      if (!player || answer.optionIndex !== this.shuffledCorrectIndex) continue;
       const elapsed = answer.at - this.questionStartedAt;
       const remaining = Math.max(0, Math.min(1, 1 - elapsed / this.answerWindowMs));
       player.score += Math.round(500 + 500 * remaining);
@@ -216,14 +251,15 @@ class QuizEngine extends EventEmitter {
     if (!q) return base;
 
     const revealed = this.status === 'reveal';
-    const displayOptions = q.lettersOnly && !revealed ? q.options.map((o) => o[0].toUpperCase()) : q.options;
+    const shuffled = this.shuffledOptions();
+    const displayOptions = q.lettersOnly && !revealed ? shuffled.map((o) => o[0].toUpperCase()) : shuffled;
     base.question = { text: q.question, options: displayOptions };
     if (this.status === 'question') {
       base.deadline = this.questionStartedAt + this.answerWindowMs;
       base.windowMs = this.answerWindowMs;
     }
     if (revealed) {
-      base.correctIndex = q.correctIndex;
+      base.correctIndex = this.shuffledCorrectIndex;
       base.optionCounts = this.optionCounts();
       base.leaderboard = this.leaderboard();
     }
@@ -235,8 +271,8 @@ class QuizEngine extends EventEmitter {
     const state = this.publicState();
     const q = this.currentQuestion();
     if (q) {
-      state.question = { text: q.question, options: q.options };
-      state.correctIndex = q.correctIndex;
+      state.question = { text: q.question, options: this.shuffledOptions() };
+      state.correctIndex = this.shuffledCorrectIndex;
       state.optionCounts = this.optionCounts();
     }
     state.leaderboard = this.leaderboard();

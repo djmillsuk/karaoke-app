@@ -1,268 +1,719 @@
 {
-  "rounds": [
-    {
-      "name": "Round 1: 1986",
-      "questions": [
-        {
-          "question": "1986: Reactor No. 4 exploded at which Soviet power station, causing the most famous nuclear disaster in history?",
-          "options": ["Three Mile Island", "Chernobyl", "Fukushima", "Sellafield"],
-          "correctIndex": 1
-        },
-        {
-          "question": "1986: Which NASA space shuttle tragically broke apart just over a minute into its launch?",
-          "options": ["Columbia", "Discovery", "Challenger", "Atlantis"],
-          "correctIndex": 2
-        },
-        {
-          "question": "1986: Which fantasy adventure film starred David Bowie as Jareth the Goblin King?",
-          "options": ["The Dark Crystal", "Labyrinth", "Legend", "Willow"],
-          "correctIndex": 1
-        },
-        {
-          "question": "1986: Which British synth-pop duo scored their iconic first UK Number 1 single with \"West End Girls\"?",
-          "options": ["Eurythmics", "Wham!", "Pet Shop Boys", "Erasure"],
-          "correctIndex": 2
-        },
-        {
-          "question": "1986: Which claymation inventor and his silent, tea-drinking dog were first created by Nick Park?",
-          "options": ["Morph", "Shaun the Sheep", "Chicken Run", "Wallace and Gromit"],
-          "correctIndex": 3
-        },
-        {
-          "question": "1986: Fujifilm launched the QuickSnap, kicking off the global craze for which single-use item?",
-          "options": ["Instant film pack", "Camcorder", "Disposable camera", "Polaroid camera"],
-          "correctIndex": 2
-        }
-      ]
-    },
-    {
-      "name": "Round 2: 1996",
-      "questions": [
-        {
-          "question": "1996: The Spice Girls exploded with \"Wannabe\". What made-up word/phrase is repeated throughout the chorus?",
-          "options": ["\"Hakuna Matata\"", "\"Zigazig-ah\"", "\"Mama mia\"", "\"Oh yeah yeah\""],
-          "correctIndex": 1
-        },
-        {
-          "question": "1996: Which egg-shaped virtual pet keychain had kids and adults frantically cleaning up digital poop?",
-          "options": ["Furby", "Giga Pet", "Tamagotchi", "Nintendogs"],
-          "correctIndex": 2
-        },
-        {
-          "question": "1996: Which dual-pistol-wielding heroine debuted raiding tombs and dodging raptors on the PlayStation?",
-          "options": ["Chun-Li", "Cortana", "Jill Valentine", "Lara Croft"],
-          "correctIndex": 3
-        },
-        {
-          "question": "1996: Edinburgh scientists cloned the world's first adult mammal. What kind of animal was Dolly?",
-          "options": ["A Cow", "A Sheep", "A Goat", "A Pig"],
-          "correctIndex": 1
-        },
-        {
-          "question": "1996: Danny Boyle's Trainspotting opened with Ewan McGregor delivering which iconic monologue?",
-          "options": ["\"I'll be back\"", "\"Here's Johnny\"", "\"Choose Life\"", "\"Say Hello to my Little Friend\""],
-          "correctIndex": 2
-        },
-        {
-          "question": "1996: In the Only Fools and Horses Christmas special, what superhero costumes were Del Boy & Rodney wearing?",
-          "options": ["Superman & Batman", "Robin Hood & Batman", "Batman & Robin", "Batman & The Joker"],
-          "correctIndex": 2
-        }
-      ]
-    },
-    {
-      "name": "Round 3: 2004",
-      "questions": [
-        {
-          "question": "2004: On Boxing Day, a catastrophic 9.1 undersea earthquake triggered a massive tsunami across which ocean?",
-          "options": ["The Pacific Ocean", "The Indian Ocean", "The Atlantic Ocean", "The Arctic Ocean"],
-          "correctIndex": 1
-        },
-        {
-          "question": "2004: After 10 seasons, Friends ended. Which character speaks the very last comedic line before going for coffee?",
-          "options": ["Ross Geller", "Joey Tribbiani", "Rachel Green", "Chandler Bing (\"Where?\")"],
-          "correctIndex": 3
-        },
-        {
-          "question": "2004: Which British horror-comedy classic, starring Simon Pegg and Nick Frost fighting off zombies, hit cinemas?",
-          "options": ["Hot Fuzz", "Zombieland", "Shaun of the Dead", "28 Days Later"],
-          "correctIndex": 2
-        },
-        {
-          "question": "2004: Which horror film introduced the world to the twisted puppet Billy and the serial killer known as Jigsaw?",
-          "options": ["Hostel", "The Ring", "Final Destination", "Saw"],
-          "correctIndex": 3
-        },
-        {
-          "question": "2004: In Harry Potter and the Prisoner of Azkaban, what magical device does Hermione use to travel back in time?",
-          "options": ["Marauder's Map", "Pensieve", "Time-Turner", "Invisibility Cloak"],
-          "correctIndex": 2
-        },
-        {
-          "question": "2004: Outkast dominated the charts by telling everyone in \"Hey Ya!\" to shake it like what kind of instant photo?",
-          "options": ["A passport photo", "A Polaroid picture", "A Kodak print", "A postcard"],
-          "correctIndex": 1
-        }
-      ]
-    },
-    {
-      "name": "Round 4: 2007",
-      "questions": [
-        {
-          "question": "2007: Which pop princess caused a global paparazzi frenzy when she walked into a salon and shaved her head?",
-          "options": ["Paris Hilton", "Lindsay Lohan", "Britney Spears", "Amy Winehouse"],
-          "correctIndex": 2
-        },
-        {
-          "question": "2007: Steve Jobs unveiled a revolutionary device combining an iPod, phone, and internet browser. What was it?",
-          "options": ["The BlackBerry Pearl", "The original iPhone", "The Motorola RAZR", "The Palm Treo"],
-          "correctIndex": 1
-        },
-        {
-          "question": "2007: Which Rihanna smash hit spent 10 straight weeks at UK Number 1 during the famously rainy summer?",
-          "options": ["\"SOS\"", "\"Disturbia\"", "\"Umbrella\"", "\"Take a Bow\""],
-          "correctIndex": 2
-        },
-        {
-          "question": "2007: Fans queued at midnight for the release of which 7th and final book in the original Harry Potter series?",
-          "options": ["Harry Potter & the Half-Blood Prince", "Harry Potter & the Order of the Phoenix", "Harry Potter & the Goblet of Fire", "Harry Potter & the Deathly Hallows"],
-          "correctIndex": 3
-        },
-        {
-          "question": "2007: Which sci-fi disaster film starred Will Smith as the last human survivor in a desolate, mutant-filled New York City?",
-          "options": ["War of the Worlds", "Independence Day", "I Am Legend", "World War Z"],
-          "correctIndex": 2
-        },
-        {
-          "question": "2007: Which beehive-sporting British singer won international acclaim with \"Rehab\" and album Back to Black?",
-          "options": ["Duffy", "Adele", "Lily Allen", "Amy Winehouse"],
-          "correctIndex": 3
-        }
-      ]
-    },
-    {
-      "name": "Round 5: 2016",
-      "questions": [
-        {
-          "question": "2016: That summer, millions took to streets and parks staring at phones playing which augmented-reality mobile game?",
-          "options": ["Ingress", "Pokémon GO", "Angry Birds", "Candy Crush"],
-          "correctIndex": 1
-        },
-        {
-          "question": "2016: Which 80s-inspired sci-fi/horror series debuted on Netflix, introducing Eleven and the \"Upside Down\"?",
-          "options": ["Dark", "The OA", "Stranger Things", "Black Mirror"],
-          "correctIndex": 2
-        },
-        {
-          "question": "Granada is home to which breathtaking Moorish hilltop fortress & palace complex?",
-          "options": ["The Sagrada Familia", "The Alcázar of Seville", "The Alhambra", "The Royal Palace of Madrid"],
-          "correctIndex": 2
-        },
-        {
-          "question": "Málaga's historic center celebrates which 20th-century Cubist art genius, born there in 1881?",
-          "options": ["Salvador Dalí", "Joan Miró", "Diego Velázquez", "Pablo Picasso"],
-          "correctIndex": 3
-        },
-        {
-          "question": "What cold, blended vegetable soup made with tomatoes, peppers, and garlic originated in Andalusia?",
-          "options": ["Paella", "Gazpacho", "Tortilla española", "Salmorejo"],
-          "correctIndex": 1
-        },
-        {
-          "question": "The dramatic cliffside town of Ronda is famous as the historical birthplace of which traditional Spanish spectacle?",
-          "options": ["Flamenco dancing", "Running of the Bulls", "Modern Bullfighting (Corrida)", "Horseback Jousting"],
-          "correctIndex": 2
-        }
-      ]
-    },
-    {
-      "name": "Round 6: 2026",
-      "questions": [
-        {
-          "question": "2026: Mount Fuji is Japan's highest and most iconic peak. What kind of geological landmark is it?",
-          "options": ["An extinct volcano", "A granite mountain", "An active volcano (stratovolcano)", "A limestone karst"],
-          "correctIndex": 2
-        },
-        {
-          "question": "What famous Japanese dish traditionally consists of seasoned vinegared rice combined with seafood or vegetables?",
-          "options": ["Ramen", "Sushi", "Tempura", "Udon"],
-          "correctIndex": 1
-        },
-        {
-          "question": "Which iconic giant radioactive monster, created in Japan in 1954, has destroyed Tokyo in over 30 blockbuster movies?",
-          "options": ["King Kong", "Mothra", "Godzilla (Gojira)", "Rodan"],
-          "correctIndex": 2
-        },
-        {
-          "question": "Japan's ultra-fast, high-speed passenger trains are known locally and globally by what nickname?",
-          "options": ["Maglev Express", "Bullet Train (Shinkansen)", "Skyliner", "Star Rail"],
-          "correctIndex": 1
-        },
-        {
-          "question": "Which tech field, powered by LLMs and neural models that write, draw, and code, has dominated headlines in the mid-2020s?",
-          "options": ["Quantum Computing", "Blockchain", "Artificial Intelligence (AI / GenAI)", "Virtual Reality"],
-          "correctIndex": 2
-        },
-        {
-          "question": "A 40th birthday milestone or anniversary is traditionally represented by which deep-red precious gemstone?",
-          "options": ["Sapphire", "Emerald", "Diamond", "Ruby"],
-          "correctIndex": 3
-        }
-      ]
-    },
-    {
-      "name": "Bonus Round: Taste Test",
-      "questions": [
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Kiwi", "Dragon Fruit (Pitaya)", "Guava", "Custard Apple", "Starfruit (Carambola)", "Banana", "Mango", "Orange", "Pear", "Watermelon"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Apple", "Starfruit (Carambola)", "Kiwi", "Guava", "Persimmon (Sharon Fruit / Kaki)", "Quince", "Mango", "Orange", "Banana", "Watermelon"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Mango", "Persimmon (Sharon Fruit / Kaki)", "Nectarine", "Cantaloupe", "Apricot", "Kiwi", "Starfruit (Carambola)", "Orange", "Date", "Banana"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Grape", "Lychee (or Rambutan)", "Mangosteen", "Papaya", "Fig", "Kiwi", "Date", "Orange", "Banana", "Watermelon"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Kumquat", "Physalis (Cape Gooseberry)", "Cherry Tomato", "Mandarin", "Tamarillo", "Date", "Orange", "Banana", "Starfruit (Carambola)", "Guava"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Date", "Fresh Fig", "Prune", "Mulberry", "Kiwi", "Orange", "Banana", "Cantaloupe", "Starfruit (Carambola)", "Guava"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Fig", "Passion Fruit", "Kiwi", "Guava", "Lychee (or Rambutan)", "Tamarillo", "Mango", "Date", "Orange", "Banana"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        },
-        {
-          "question": "Taste test: Which fruit is it?",
-          "options": ["Mango", "Papaya", "Cantaloupe", "Nectarine", "Kiwi", "Starfruit (Carambola)", "Fig", "Orange", "Date", "Banana"],
-          "correctIndex": 1,
-          "lettersOnly": true
-        }
-      ]
-    }
-  ]
+	"quizTitle": "8 Out of 10 Cats Have Been Pestered by Heather",
+	"rounds": [
+		{
+			"round": 1,
+			"name": "True or False",
+			"questions": [
+				{
+					"question": "Heather has flown in a helicopter",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Heather’s first job was a waitress",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Heather has ridden a camel",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Heather’s dream holiday is a world cruise",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Heather passed her driving test with a perfect score",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Heather has hugged a capybara",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "Heather has a tattoo",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "Heather has been stopped by the police",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "Missing question 9",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Heather has met celebrity chef Rick Stein",
+					"options": [
+						"True",
+						"False"
+					],
+					"correctIndex": 0
+				}
+			]
+		},
+		{
+			"round": 2,
+			"name": "General Knowledge",
+			"questions": [
+				{
+					"question": "What is Heather’s shoe size?",
+					"options": [
+						"6",
+						"7",
+						"8",
+						"9"
+					],
+					"correctIndex": 2
+				},
+				{
+					"question": "What is Heather’s middle name?",
+					"options": [
+						"Jane",
+						"Louise",
+						"Marie",
+						"Elizabeth"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What is Heather’s job title?",
+					"options": [
+						"Principal clinical psychologist / clinical lead",
+						"Consultant psychologist",
+						"Senior occupational therapist",
+						"Head of psychological services"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What was one of the best-selling Christmas toys the year Heather was born?",
+					"options": [
+						"Lazer Tag",
+						"Tamagotchi",
+						"Furby",
+						"Pokémon cards"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Name Heather’s three cats",
+					"options": [
+						"Newt, Pintxo & Mooli",
+						"Newt, Pincho & Mewli",
+						"Pickle, Pintxo & Moose",
+						"Noodle, Pinto & Molly"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What college did Heather go to?",
+					"options": [
+						"Wardle 6th Form",
+						"Rochdale Sixth Form",
+						"Hopwood Hall College",
+						"Oldham Sixth Form"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What high school did Heather go to?",
+					"options": [
+						"Wardle",
+						"Whitworth",
+						"Littleborough",
+						"Hollingworth"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which ball has Heather been hit in the face with the most?",
+					"options": [
+						"Football",
+						"Basketball",
+						"Ping pong",
+						"Netball"
+					],
+					"correctIndex": 3
+				},
+				{
+					"question": "Which did Heather participate in the longest?",
+					"options": [
+						"Football",
+						"Horse riding",
+						"Tap dancing",
+						"Karate"
+					],
+					"correctIndex": 1
+				}
+			]
+		},
+		{
+			"round": 3,
+			"name": "History",
+			"questions": [
+				{
+					"question": "Who won in Vegas: Heather or the house?",
+					"options": [
+						"Heather",
+						"The house",
+						"It was a draw",
+						"She lost it all, then won it back"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What was Heather’s first car?",
+					"options": [
+						"Toyota Yaris Verso",
+						"Nissan Micra",
+						"Ford Ka",
+						"Peugeot 206"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Where did Heather live outside of Greater Manchester?",
+					"options": [
+						"Leeds",
+						"Sheffield",
+						"York",
+						"Liverpool"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What was Heather’s first job after graduating?",
+					"options": [
+						"Waitress",
+						"Barista",
+						"Shop assistant",
+						"Receptionist"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "At what age did Heather become vegetarian?",
+					"options": [
+						"8",
+						"12",
+						"14",
+						"17"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "On this day in 2001, which event occurred that made world headlines?",
+					"options": [
+						"Twin towers",
+						"The Millennium Dome opened",
+						"Concorde made its final passenger flight",
+						"The Berlin Wall came down"
+					],
+					"correctIndex": 0
+				}
+			]
+		},
+		{
+			"round": 4,
+			"name": "Travel & Geography",
+			"questions": [
+				{
+					"question": "What is Heather’s most visited country?",
+					"options": [
+						"Spain",
+						"France",
+						"Italy",
+						"Germay"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Where was Heather’s first road trip adventure?",
+					"options": [
+						"Crete",
+						"USA",
+						"Malta",
+						"Sri Lanka"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which country was not included on the graduation interrail trip?",
+					"options": [
+						"Germany",
+						"Italy",
+						"France",
+						"Spain"
+					],
+					"correctIndex": 2
+				},
+				{
+					"question": "What was the nickname Heather gave her backpack on the Europe trip?",
+					"options": [
+						"The wanker",
+						"The bastard",
+						"The ball breaker",
+						"The backbreaker"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "In which country did Heather release baby turtles AND cuddle baby elephants?",
+					"options": [
+						"Sri Lanka",
+						"Thailand",
+						"Costa Rica",
+						"Bali"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Where was Heather’s first holiday outside of Europe?",
+					"options": [
+						"Florida",
+						"Mexico",
+						"New York",
+						"Dubai"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which was the longest flight for Heather?",
+					"options": [
+						"Peru",
+						"Madiera",
+						"Malta",
+						"Sri Lanka"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which country has Heather not had food poisoning in?",
+					"options": [
+						"India",
+						"England",
+						"Thailand",
+						"Vietnam"
+					],
+					"correctIndex": 0
+				}
+			]
+		},
+		{
+			"round": 5,
+			"name": "Food & Drink",
+			"questions": [
+				{
+					"question": "What was Heather’s first world food challenge dish order?",
+					"options": [
+						"Tuvalu tuna curry",
+						"Icelandic fermented shark",
+						"Peruvian ceviche",
+						"Moroccan tagine"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which country is the only one left in Heather’s world food challenge?",
+					"options": [
+						"France",
+						"Japan",
+						"Brazil",
+						"Greece"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which one of these foods would Heather NOT eat again?",
+					"options": [
+						"Turtle",
+						"Alpaca",
+						"Guinea pig",
+						"Fermented shark"
+					],
+					"correctIndex": 3
+				},
+				{
+					"question": "In Heather’s extensive alcohol collection, which spirit occurs most frequently?",
+					"options": [
+						"Rum",
+						"Gin",
+						"Vodka",
+						"Tequila"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "Which of these meats doesn’t Heather like?",
+					"options": [
+						"Pork",
+						"Beef",
+						"Lamb",
+						"Chicken"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "How many countries and territories has Heather cooked dishes for on her world food challenge so far?",
+					"options": [
+						"194",
+						"87",
+						"42",
+						"126"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "What is Heather’s favourite tapas dish to order?",
+					"options": [
+						"Something she probably won’t like but has tried",
+						"Patatas Bravas",
+						"Anything with beef",
+						"Anything thats not fish"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which non-human food product has Heather not tried?",
+					"options": [
+						"Dreamies",
+						"Pawsecco",
+						"Dog chocolate",
+						"Catnip"
+					],
+					"correctIndex": 3
+				},
+				{
+					"question": "Which cocktail is Heather least likely to order?",
+					"options": [
+						"Long Island iced tea",
+						"Bloody Mary",
+						"Zombie",
+						"Negroni"
+					],
+					"correctIndex": 3
+				}
+			]
+		},
+		{
+			"round": 6,
+			"name": "Music",
+			"questions": [
+				{
+					"question": "Which one of these artists did Heather see live as a child?",
+					"options": [
+						"Take That",
+						"Aqua",
+						"Spice Girls",
+						"Blur"
+					],
+					"correctIndex": 3
+				},
+				{
+					"question": "Which former Radio 1 DJ did Heather decline an invite to an after party from?",
+					"options": [
+						"Tim Westwood",
+						"Dave Lee Travis",
+						"Chris Moyles",
+						"Bruno Brookes"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "How many Eurovision acts has Heather been to see live?",
+					"options": [
+						"0",
+						"9",
+						"2",
+						"6"
+					],
+					"correctIndex": 2
+				},
+				{
+					"question": "Guess this top ten best-selling single from the year Heather was born.",
+					"options": [
+						"Don’t Leave Me This Way — The Communards",
+						"The Lady in Red — Chris de Burgh",
+						"Papa Don’t Preach — Madonna",
+						"The Final Countdown — Europe"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which of these artists is Heather most likely to sing at karaoke?",
+					"options": [
+						"Spice Girls",
+						"Metallica",
+						"No Doubt",
+						"All Saints"
+					],
+					"correctIndex": 2
+				}
+			]
+		},
+		{
+			"round": 7,
+			"name": "Quick fire",
+			"questions": [
+				{
+					"question": "What subject did Heather not study for A levels?",
+					"options": [
+						"Psychology",
+						"Politics",
+						"History",
+						"English"
+					],
+					"correctIndex": 1
+				},
+				{
+					"question": "Which fancy dress has Heather not done?",
+					"options": [
+						"Pole dancer",
+						"Sexy Braveheart",
+						"Sexy Viking",
+						"Playboy bunny"
+					],
+					"correctIndex": 3
+				},
+				{
+					"question": "What volunteer role did Heather do which turned into a paid job?",
+					"options": [
+						"OCD Advocate",
+						"Crafts with older adults",
+						"Teen Mentor",
+						"Samaritans volunteer"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Where did she do her doctorate?",
+					"options": [
+						"Lancaster",
+						"Leeds",
+						"Manchester",
+						"Sheffield"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Which language did Heather accidentally learn a little too well?",
+					"options": [
+						"Italian",
+						"Spanish",
+						"French",
+						"German"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "In what year did Heather graduate from Lancaster?",
+					"options": [
+						"2016",
+						"2014",
+						"2018",
+						"2020"
+					],
+					"correctIndex": 0
+				},
+				{
+					"question": "Where was Heather supposed to be in the first week of lockdown?",
+					"options": [
+						"Cambodia",
+						"Peru",
+						"Japan",
+						"Australia"
+					],
+					"correctIndex": 2
+				},
+				{
+					"question": "Which of these jobs did Heather not want to do growing up?",
+					"options": [
+						"Vet",
+						"Doctor",
+						"Actress",
+						"Interior designer"
+					],
+					"correctIndex": 1
+				}
+			]
+		},
+		{
+			"name": "Bonus Round: Taste Test",
+			"questions": [
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Kiwi",
+						"Dragon Fruit",
+						"Guava",
+						"Custard Apple",
+						"Starfruit",
+						"Banana",
+						"Mango",
+						"Orange",
+						"Pear",
+						"Watermelon"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Apple",
+						"Starfruit",
+						"Kiwi",
+						"Guava",
+						"Persimmon",
+						"Quince",
+						"Mango",
+						"Orange",
+						"Banana",
+						"Watermelon"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Mango",
+						"Persimmon",
+						"Nectarine",
+						"Cantaloupe",
+						"Apricot",
+						"Kiwi",
+						"Starfruit",
+						"Orange",
+						"Date",
+						"Banana"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Grape",
+						"Lychee",
+						"Mangosteen",
+						"Papaya",
+						"Fig",
+						"Kiwi",
+						"Date",
+						"Orange",
+						"Banana",
+						"Watermelon"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Kumquat",
+						"Physalis",
+						"Cherry Tomato",
+						"Mandarin",
+						"Tamarillo",
+						"Date",
+						"Orange",
+						"Banana",
+						"Starfruit",
+						"Guava"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Date",
+						"Fresh Fig",
+						"Prune",
+						"Mulberry",
+						"Kiwi",
+						"Orange",
+						"Banana",
+						"Cantaloupe",
+						"Starfruit",
+						"Guava"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Fig",
+						"Passion Fruit",
+						"Kiwi",
+						"Guava",
+						"Lychee",
+						"Tamarillo",
+						"Mango",
+						"Date",
+						"Orange",
+						"Banana"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				},
+				{
+					"question": "Taste test: Which fruit is it?",
+					"options": [
+						"Mango",
+						"Papaya",
+						"Cantaloupe",
+						"Nectarine",
+						"Kiwi",
+						"Starfruit",
+						"Fig",
+						"Orange",
+						"Date",
+						"Banana"
+					],
+					"correctIndex": 1,
+					"lettersOnly": true
+				}
+			]
+		}
+	],
+	"note": "Questions with only one option reflect missing or incomplete options in the document; correctIndex is still zero-based."
 }
-
