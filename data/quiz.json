@@ -70,14 +70,6 @@
 					"correctIndex": 1
 				},
 				{
-					"question": "Missing question 9",
-					"options": [
-						"True",
-						"False"
-					],
-					"correctIndex": 0
-				},
-				{
 					"question": "Heather has met celebrity chef Rick Stein",
 					"options": [
 						"True",
