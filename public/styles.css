@@ -62,6 +62,12 @@ body {
   box-shadow: 0 0 0 3px rgba(38, 198, 218, 0.15);
 }
 
+@media (max-width: 600px) {
+  #search {
+    flex-basis: 100%;
+  }
+}
+
 #random {
   padding: 11px 16px;
   font-size: 15px;
