@@ -257,7 +257,7 @@ mark {
 @media (max-width: 760px) {
   .layout {
     grid-template-columns: 1fr;
-    grid-template-rows: fit-content(41.67%) fit-content(58.33%);
+    grid-template-rows: var(--mobile-artist-height, 1fr) minmax(0, 1.4fr);
   }
 }
 

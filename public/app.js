@@ -5,6 +5,9 @@ const ARTIST_ROW = 44;
 const SONG_ROW = 56;
 
 const el = {
+  layout: document.querySelector('.layout'),
+  artistsPanel: document.querySelector('.artists-panel'),
+  artistsHeading: document.getElementById('artists-heading'),
   search: document.getElementById('search'),
   random: document.getElementById('random'),
   favourites: document.getElementById('favourites'),
@@ -245,16 +248,58 @@ const songView = new VirtualList(
   }
 );
 
+let panelLayoutFrame = null;
+function updateMobilePanelLayout() {
+  panelLayoutFrame = null;
+  if (!window.matchMedia('(max-width: 760px)').matches) {
+    el.layout.style.removeProperty('--mobile-artist-height');
+    return;
+  }
+
+  const availableHeight = el.layout.clientHeight;
+  if (!availableHeight) return;
+
+  const artistMaximum = Math.round(availableHeight / 2.4);
+  const detailMaximum = availableHeight - artistMaximum - 1;
+  const artistPanelTop = el.artistsPanel.getBoundingClientRect().top;
+  const detailPanelTop = el.detailScroll.parentElement.getBoundingClientRect().top;
+  const artistBase = el.artistScroll.getBoundingClientRect().top - artistPanelTop;
+  const detailBase = el.detailScroll.getBoundingClientRect().top - detailPanelTop;
+  const artistNeeded = artistView.items.length
+    ? artistBase + artistView.items.length * ARTIST_ROW
+    : el.artistsHeading.getBoundingClientRect().height;
+  const detailNeeded = detailBase + songView.items.length * SONG_ROW;
+
+  let artistHeight = artistMaximum;
+  if (artistNeeded <= artistMaximum) {
+    artistHeight = artistNeeded;
+  } else if (detailNeeded <= detailMaximum) {
+    artistHeight = availableHeight - detailNeeded - 1;
+  }
+
+  el.layout.style.setProperty('--mobile-artist-height', `${Math.max(artistNeeded, artistHeight)}px`);
+  artistView.refresh();
+  songView.refresh();
+}
+
+function scheduleMobilePanelLayout() {
+  if (!panelLayoutFrame) panelLayoutFrame = requestAnimationFrame(updateMobilePanelLayout);
+}
+
+window.addEventListener('resize', scheduleMobilePanelLayout);
+
 function setDetail(heading, sub, songs, opts = {}) {
   el.detailHeading.textContent = heading;
   el.detailSub.textContent = sub;
   state.songs = songs;
   songView.setItems(songs, opts);
+  scheduleMobilePanelLayout();
 }
 
 function setArtists(list, emptyText) {
   artistView.setItems(list, { emptyText });
   el.artistCount.textContent = list.length.toLocaleString();
+  scheduleMobilePanelLayout();
 }
 
 async function getJson(url) {
