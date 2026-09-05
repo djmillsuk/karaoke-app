@@ -277,7 +277,7 @@ function updateMobilePanelLayout() {
     artistHeight = availableHeight - detailNeeded - 1;
   }
 
-  el.layout.style.setProperty('--mobile-artist-height', `${Math.max(artistNeeded, artistHeight)}px`);
+  el.layout.style.setProperty('--mobile-artist-height', `${artistHeight}px`);
   artistView.refresh();
   songView.refresh();
 }
