@@ -255,7 +255,10 @@ mark {
 }
 
 @media (max-width: 760px) {
-  .layout { grid-template-columns: 1fr; grid-template-rows: 1fr 1.4fr; }
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: fit-content(41.67%) fit-content(58.33%);
+  }
 }
 
 .button-link {
