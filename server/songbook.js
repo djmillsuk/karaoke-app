@@ -5,12 +5,13 @@ const { parseCsv } = require('./csv');
 
 const MAX_RESULTS = 100;
 
-/** Lowercase, strip accents, collapse whitespace. */
+/** Lowercase, strip accents and punctuation, then collapse whitespace. */
 function normalize(str) {
   return str
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
 }

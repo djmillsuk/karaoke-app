@@ -111,6 +111,16 @@ const state = {
 
 const FAV_KEY = 'karaoke.favourites.v1';
 
+function normalizeSearch(text) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 /** Identity that survives CSV reloads/re-ordering, unlike the numeric song id. */
 function favKey(song) {
   return `${song.artist}\u0000${song.title}`.toLowerCase();
@@ -308,8 +318,8 @@ async function runSearch(query) {
   const data = await getJson(`/api/search?q=${encodeURIComponent(query)}`);
   if (token !== searchToken) return; // a newer keystroke already won
 
-  const q = query.trim().toLowerCase();
-  const filteredArtists = state.artists.filter((a) => a.name.toLowerCase().includes(q));
+  const q = normalizeSearch(query);
+  const filteredArtists = state.artists.filter((a) => a.key.includes(q));
   setArtists(filteredArtists, 'No artist names contain that phrase.');
 
   const capped = data.count >= data.limit ? ` (first ${data.limit})` : '';
